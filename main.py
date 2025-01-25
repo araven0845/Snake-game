@@ -41,14 +41,16 @@ while game_on:
         snake.head.xcor() > 280 or snake.head.xcor() < -280 or
         snake.head.ycor() > 280 or snake.head.ycor() < -280
     ):
-        scoreboard.game_over()  # Display "Game Over" on the screen
-        game_on = False  # End the game loop
+        scoreboard.reset_scoreboard()  # Reset game and update high score
+        snake.reset_snake()
+        snake.head.goto(0, 0)
 
     # 7. Detect collision with the snake's own body
     for segment in snake.segments[1:]:
         if snake.head.distance(segment) < 10:  # If the head collides with any body segment
-            game_on = False
-            scoreboard.game_over()  # Display "Game Over" on the screen
+            scoreboard.reset_scoreboard()  # Display "Game Over" on the screen
+            snake.reset_snake()
+            snake.head.goto(0,0)
 
 # 8. Exit the game when the screen is clicked
 screen.exitonclick()
